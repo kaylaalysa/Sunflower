@@ -56,6 +56,7 @@ import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 import java.util.*
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun GardenScreen(
@@ -97,7 +98,7 @@ private fun GardenList(
     val gridState = rememberLazyGridState()
     ReportDrawnWhen { gridState.layoutInfo.totalItemsCount > 0 }
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(3),
         modifier,
         state = gridState,
         contentPadding = PaddingValues(
@@ -135,7 +136,7 @@ private fun GardenListItem(
             end = cardSideMargin,
             bottom = dimensionResource(id = R.dimen.card_bottom_margin)
         ),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
     ) {
         Column(Modifier.fillMaxWidth()) {
             SunflowerImage(
@@ -150,10 +151,12 @@ private fun GardenListItem(
             // Plant name
             Text(
                 text = vm.plantName,
-                Modifier
+                modifier = Modifier
                     .padding(vertical = marginNormal)
                     .align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold
+                ),
             )
 
             // Planted date

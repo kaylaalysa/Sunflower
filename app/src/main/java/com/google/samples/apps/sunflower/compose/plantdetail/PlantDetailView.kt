@@ -46,6 +46,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -73,6 +74,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -458,6 +460,7 @@ private fun PlantHeaderActions(
     Row(
         modifier = modifier
             .fillMaxSize()
+//            .background(MaterialTheme.colorScheme.)
             .systemBarsPadding()
             .padding(top = Dimens.ToolbarIconPadding),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -517,7 +520,6 @@ private fun PlantInformation(
     Column(modifier = modifier.padding(Dimens.PaddingLarge)) {
         Text(
             text = name,
-            style = MaterialTheme.typography.displaySmall,
             modifier = Modifier
                 .padding(
                     start = Dimens.PaddingSmall,
@@ -526,8 +528,12 @@ private fun PlantInformation(
                 )
                 .align(Alignment.CenterHorizontally)
                 .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
-                .visible { toolbarState == ToolbarState.HIDDEN }
+                .visible { toolbarState == ToolbarState.HIDDEN },
+            style = MaterialTheme.typography.displaySmall.copy(
+                fontWeight = FontWeight.Bold
+            )
         )
+
         Box(
             Modifier
                 .align(Alignment.CenterHorizontally)
@@ -563,6 +569,7 @@ private fun PlantInformation(
                     Modifier
                         .clickable { onGalleryClick() }
                         .align(Alignment.CenterEnd)
+                        .background(MaterialTheme.colorScheme.secondaryContainer)
                 )
             }
         }
